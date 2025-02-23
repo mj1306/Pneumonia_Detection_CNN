@@ -22,6 +22,7 @@ model = tf.keras.models.Sequential([
     vgg_base,  # VGG16 base model without the top layer
     tf.keras.layers.GlobalAveragePooling2D(),  # GPL
     tf.keras.layers.Dense(128, activation='relu'),  # FC layer with 128 neurons
+    tf.keras.layers.Dropout(0.5), #Model is overfitting without dropout
     tf.keras.layers.Dense(11, activation='softmax')  # Softmax output layer for 11 classes 
 ])
 
