@@ -33,26 +33,9 @@ model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 0.0001),
 
 #model.summary()
 
-if use_saved_weights:
-    try:
-        model.load_weights('model_checkpoint.weights.h5')
-        print("Loaded weights from checkpoint.")
-    except:
-        model = tf.keras.models.load_model('final_model.keras')
-        print("Loaded entire model from saved file.")
-else:
-    print("Starting training from ImageNet weights.")
-
-checkpoint = tf.keras.callbacks.ModelCheckpoint('model_checkpoint.weights.h5', 
-                                      save_best_only=True,  
-                                      save_weights_only=True,  
-                                      verbose=1)
 history = model.fit(train_dataset,
                     validation_data=validation_dataset,
-                    epochs=10,
-                    callbacks=[checkpoint])  
-
-model.save('final_model.keras')  
+                    epochs=10)   
 
 #%% Plot the accuracy and loss over epochs
 acc = [0.] + history.history['accuracy']
@@ -83,10 +66,5 @@ plt.show()
 #%%
 with open('training_history.txt', 'w') as f:
     f.write(json.dumps(history.history, indent=4))
-
-
-
-
-
 
 # %%
