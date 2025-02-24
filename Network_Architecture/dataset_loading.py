@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 #%%
 BATCH_SIZE = 32
-IMG_SIZE = (160,160) #Fixed image size in-case dataset consists of images of different sizes
+IMG_SIZE = (256,256) #Fixed image size in-case dataset consists of images of different sizes
 train_directory = r"datasets\Bone_Break_Classification\train"
 valid_directory = r"datasets\Bone_Break_Classification\valid"
 
@@ -21,6 +21,9 @@ validation_dataset = krs.preprocessing.image_dataset_from_directory(valid_direct
                                              batch_size=BATCH_SIZE,
                                              image_size=IMG_SIZE,
                                              seed=42)
+
+#for image, label in train_dataset.take(1):  
+#    print(image.shape)
 
 #%%Data Augmenter
 
