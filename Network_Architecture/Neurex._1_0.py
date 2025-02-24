@@ -13,7 +13,7 @@ vgg_base.trainable = True
 
 #print(len(vgg_base.layers))
 
-fine_tune_at = 15
+fine_tune_at = 0
 
 for layer in vgg_base.layers[ :fine_tune_at]:
     layer.trainable = False
@@ -22,7 +22,7 @@ model = tf.keras.models.Sequential([
     vgg_base,  # VGG16 base model without the top layer
     tf.keras.layers.GlobalAveragePooling2D(),  # GPL
     tf.keras.layers.Dense(128, activation='relu'),  # FC layer with 128 neurons
-    tf.keras.layers.Dropout(0.5), #Model is overfitting without dropout
+    #tf.keras.layers.Dropout(0.5)
     tf.keras.layers.Dense(11, activation='softmax')  # Softmax output layer for 11 classes 
 ])
 

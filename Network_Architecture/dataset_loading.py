@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 #%%
 BATCH_SIZE = 32
 IMG_SIZE = (160,160) #Fixed image size in-case dataset consists of images of different sizes
-train_directory = r"datasets\Bone_Break_Classification\test"
+train_directory = r"datasets\Bone_Break_Classification\train"
 valid_directory = r"datasets\Bone_Break_Classification\valid"
 
 #%%
