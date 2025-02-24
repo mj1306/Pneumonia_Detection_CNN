@@ -22,6 +22,16 @@ validation_dataset = krs.preprocessing.image_dataset_from_directory(valid_direct
                                              image_size=IMG_SIZE,
                                              seed=42)
 
+#%%Data Augmenter
+
+def data_augment():
+    return tf.keras.Sequential([
+        tf.keras.layers.RandomFlip("horizontal_and_vertical"),
+        tf.keras.layers.RandomRotation(0.2),
+        tf.keras.layers.RandomZoom(0.2),
+        tf.keras.layers.RandomContrast(0.2),
+    ])
+
 #%%Test to see labelled images
 class_names = train_dataset.class_names
 

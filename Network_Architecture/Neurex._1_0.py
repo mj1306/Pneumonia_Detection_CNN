@@ -4,7 +4,7 @@ import tensorflow as tf
 import keras as krs
 import matplotlib.pyplot as plt
 import json
-from dataset_loading import train_dataset, validation_dataset
+from dataset_loading import train_dataset, validation_dataset, data_augment
 
 #%%
 vgg_base = tf.keras.applications.VGG16(weights='imagenet', include_top=False, input_shape=(160, 160, 3))
@@ -13,12 +13,13 @@ vgg_base.trainable = True
 
 #print(len(vgg_base.layers))
 
-fine_tune_at = 0
+fine_tune_at = 15
 
 for layer in vgg_base.layers[ :fine_tune_at]:
     layer.trainable = False
 #%%
 model = tf.keras.models.Sequential([
+    data_augment(),
     vgg_base,  # VGG16 base model without the top layer
     tf.keras.layers.GlobalAveragePooling2D(),  # GPL
     tf.keras.layers.Dense(128, activation='relu'),  # FC layer with 128 neurons
