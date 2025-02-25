@@ -9,7 +9,7 @@ from dataset_loading import train_dataset, validation_dataset, data_augment
 #%%
 resnet50_base = tf.keras.applications.ResNet50(weights = "imagenet", include_top = False, input_shape = (256,256,3))
 
-resnet50_base.trainable = False
+resnet50_base.trainable = True
 
 fine_tune_at = 140
 
