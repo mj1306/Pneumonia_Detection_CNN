@@ -175,6 +175,3 @@ datasets/
 
 #Large files
 *.h5
-
-# Ignore everything in the FracAtlas directory
-FracAtlas/*
