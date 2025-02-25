@@ -5,13 +5,14 @@ import keras as krs
 import matplotlib.pyplot as plt
 import json
 from dataset_loading import train_dataset, validation_dataset, data_augment
+import os
 
 #%%
 resnet50_base = tf.keras.applications.ResNet50(weights = "imagenet", include_top = False, input_shape = (256,256,3))
 
 resnet50_base.trainable = True
 
-fine_tune_at = 140
+fine_tune_at = 80
 
 for layer in resnet50_base.layers[ :fine_tune_at]:
     layer.trainable = False
@@ -35,7 +36,7 @@ model.summary()
 #%%
 history = model.fit(train_dataset,
                     validation_data=validation_dataset,
-                    epochs=10)   
+                    epochs=2)   
 
 #%% Plot the accuracy and loss over epochs
 acc = [0.] + history.history['accuracy']
@@ -63,6 +64,24 @@ plt.xlabel('epoch')
 
 plt.show()
 
+file_path = 'training_history.txt'
+
+#%% Load existing history or initialize an empty dictionary
+if os.path.exists(file_path):
+    with open(file_path, 'r') as f:
+        try:
+            all_history = json.load(f)
+        except json.JSONDecodeError:
+            all_history = {}
+else:
+    all_history = {}
+
+# Determine the next training index
+next_index = len(all_history) + 1
+training_key = f"training ({next_index})"
+
+# Add new history
+all_history[training_key] = history.history
 #%%
 with open('training_history.txt', 'w') as f:
     f.write(json.dumps(history.history, indent=4))
