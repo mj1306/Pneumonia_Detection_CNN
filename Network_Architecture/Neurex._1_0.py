@@ -11,11 +11,9 @@ resnet50_base = tf.keras.applications.ResNet50(weights = "imagenet", include_top
 
 resnet50_base.trainable = False
 
-#print(len(resnet50_base.layers))
+fine_tune_at = 140
 
-#fine_tune_at = 
-
-for layer in resnet50_base.layers:
+for layer in resnet50_base.layers[ :fine_tune_at]:
     layer.trainable = False
 
 model = tf.keras.models.Sequential([
