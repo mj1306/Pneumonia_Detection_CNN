@@ -19,10 +19,11 @@ for layer in resnet50_base.layers:
     layer.trainable = False
 
 model = tf.keras.models.Sequential([
+    data_augment(),
     resnet50_base,
     tf.keras.layers.GlobalAveragePooling2D(),  # GPL
     tf.keras.layers.Dense(128, activation='relu'),  # FC layer with 128 neurons
-    tf.keras.layers.Dropout(0.5),
+    #tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(11, activation='softmax')  # Softmax output layer for 11 classes 
 ])
 
