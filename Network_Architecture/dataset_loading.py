@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 #%%
 BATCH_SIZE = 32
 IMG_SIZE = (256,256) #Fixed image size in-case dataset consists of images of different sizes
-train_directory = r"datasets\Bone_Break_Classification\train"
-valid_directory = r"datasets\Bone_Break_Classification\valid"
+train_directory = r"datasets\chest_xray\chest_xray\train"
+valid_directory = r"datasets\chest_xray\chest_xray\val"
 
 #%%
 train_dataset = krs.preprocessing.image_dataset_from_directory(train_directory,

@@ -10,12 +10,13 @@ import os
 #%%
 resnet50_base = tf.keras.applications.ResNet50(weights = "imagenet", include_top = False, input_shape = (256,256,3))
 
-resnet50_base.trainable = True
+resnet50_base.trainable = False
 
 fine_tune_at = 80
 
-for layer in resnet50_base.layers[ :fine_tune_at]:
-    layer.trainable = False
+if resnet50_base.trainable == True:
+    for layer in resnet50_base.layers[ :fine_tune_at]:
+        layer.trainable = False
 
 model = tf.keras.models.Sequential([
     data_augment(),
@@ -23,12 +24,12 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.GlobalAveragePooling2D(),  # GPL
     tf.keras.layers.Dense(128, activation='relu'),  # FC layer with 128 neurons
     #tf.keras.layers.Dropout(0.5),
-    tf.keras.layers.Dense(11, activation='softmax')  # Softmax output layer for 11 classes 
+    tf.keras.layers.Dense(1, activation='sigmoid')  # Softmax output layer for 11 classes 
 ])
 
 #%%
 model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 0.0001), 
-              loss='sparse_categorical_crossentropy',  # Data labels are integers (not one-hot encoded)
+              loss='binary_crossentropy',  # Data labels are integers (not one-hot encoded)
               metrics=['accuracy'])
 
 model.summary()
@@ -64,9 +65,9 @@ plt.xlabel('epoch')
 
 plt.show()
 
+#%%
 file_path = 'training_history.txt'
 
-#%% Load existing history or initialize an empty dictionary
 if os.path.exists(file_path):
     with open(file_path, 'r') as f:
         try:
@@ -76,11 +77,9 @@ if os.path.exists(file_path):
 else:
     all_history = {}
 
-# Determine the next training index
 next_index = len(all_history) + 1
 training_key = f"training ({next_index})"
 
-# Add new history
 all_history[training_key] = history.history
 #%%
 with open('training_history.txt', 'w') as f:
