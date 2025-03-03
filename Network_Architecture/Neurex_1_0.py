@@ -28,7 +28,7 @@ model = tf.keras.models.Sequential([
 ])
 
 #%%
-model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-5),
+model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4),
               loss='binary_crossentropy',  
               metrics=['accuracy'])
 
@@ -37,7 +37,7 @@ model.summary()
 #%%
 history = model.fit(train_dataset,
                     validation_data=validation_dataset,
-                    epochs=10)   
+                    epochs=15)   
 
 test_loss, test_accuracy = model.evaluate(test_dataset)
 print(f'Test Loss: {test_loss}')
