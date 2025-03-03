@@ -28,7 +28,7 @@ model = tf.keras.models.Sequential([
 ])
 
 #%%
-model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4),
+model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-3),
               loss='binary_crossentropy',  
               metrics=['accuracy'])
 
@@ -37,12 +37,14 @@ model.summary()
 #%%
 history = model.fit(train_dataset,
                     validation_data=validation_dataset,
-                    epochs=15)   
+                    epochs=10)   
 
 test_loss, test_accuracy = model.evaluate(test_dataset)
 print(f'Test Loss: {test_loss}')
 print(f'Test Accuracy: {test_accuracy}')
 
+model.save_weights("vgg_model_weights.h5")
+model.save("vgg_model_full.h5")
 
 #%% Plot the accuracy and loss over epochs
 acc = [0.] + history.history['accuracy']
