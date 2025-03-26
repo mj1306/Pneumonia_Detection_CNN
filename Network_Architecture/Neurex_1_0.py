@@ -37,13 +37,13 @@ model.summary()
 #%%
 history = model.fit(train_dataset,
                     validation_data=validation_dataset,
-                    epochs=10)   
+                    epochs=14)   
 
 test_loss, test_accuracy = model.evaluate(test_dataset)
 print(f'Test Loss: {test_loss}')
 print(f'Test Accuracy: {test_accuracy}')
 
-model.save_weights("vgg_model_weights.h5")
+model.save_weights("vgg_model.weights.h5")
 model.save("vgg_model_full.h5")
 
 #%% Plot the accuracy and loss over epochs
