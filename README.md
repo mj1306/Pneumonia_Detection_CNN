@@ -1,6 +1,6 @@
 # Pneumonia Detection Using CNNs
 
-This project utilizes **transfer learning** with pre-trained models (**VGG16** and **ResNet50**) to classify whether a patient has pneumonia from X-ray images. The objective is to determine which architecture yields better performance in detecting and classifying fractures.
+This project utilizes **transfer learning** with pre-trained models (**VGG16** and **ResNet50**) to classify whether a patient has pneumonia from X-ray images. The objective is to determine which architecture yields better performance in detecting and classifying chest X-ray images.
 
 ## Project Overview
 
@@ -10,7 +10,7 @@ Pneumonia is a serious respiratory condition that requires timely and accurate d
 ### Models Used:
 
 - **VGG16** is a widely used Convolutional neural Network (CNN) with 16 layers (13 convolutional layers and 3 fully connected layers). Developed by the Visual Geometry Group, its beauty lies in it's straight forward architecture and ease of application in transfer learning projects such as this one, making it very popular among researchers and for practical applications. If you're interested in learning more about the original architecture of the VGG16, Medium has an article on ["Everything you need to know about VGG16"](https://medium.com/@mygreatlearning/everything-you-need-to-know-about-vgg16-7315defb5918).
-- **ResNet50** is a deep CNN model that leverages residual (skip) connections to mitigate the vanishing gradient problem and allow for deeper neural networks without hurting performance. The beauty in residual blocks is that unaltered inputs can be passed onto further layers; ensuring that essential information is preserved and propagated through the layers. Roboflow has a great article on the [Resnet50](https://blog.roboflow.com/what-is-resnet-50/#:~:text=ResNet%2D50%20is%20a%20convolutional,it%2C%20and%20categorize%20them%20accordingly).
+- **ResNet50** is a deep CNN model that leverages residual (skip) connections to mitigate the vanishing gradient problem and allow for deeper neural networks without hurting performance. The beauty in residual blocks is that unaltered inputs can be passed onto further layers; ensuring that essential information is preserved and propagated through the layers. Roboflow has a great article on the [ResNet50](https://blog.roboflow.com/what-is-resnet-50/#:~:text=ResNet%2D50%20is%20a%20convolutional,it%2C%20and%20categorize%20them%20accordingly).
 ## Dataset
 
 The dataset consists of labeled X-ray images of chest x-rays classified as normal/pneumonia. The dataset is created by kaggle and can be found here - [Chest X-Ray Images](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download)
@@ -24,7 +24,11 @@ The dataset consists of labeled X-ray images of chest x-rays classified as norma
 
 This project demonstrates the applications of Convolutional Neural Networks in the medical imaging domain, including:  
 - The use of **Transfer Learning** to learn useful patterns recognized by pre-trained models.  
-- Importance of **Fine-tuning** CNN architectures to adapt your model to generalize well on your target dataset.  
+- Importance of **Fine-tuning** CNN architectures to adapt your model to generalize well on your target dataset.
+
+## Key Interpretations
+
+While ResNet50 excels at complex image classification tasks with its skip connections — allowing it to capture finer details — I observed that it tended to overfit this dataset. In contrast, the VGG16-based Neurex 1.1 achieved a remarkable 90.35% accuracy, outperforming ResNet50.
 
 ## Acknowledgments  
 
